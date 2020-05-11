@@ -27,39 +27,44 @@ function validAnagram(firstStr, secStr) {
   1. check base case to see if the strings are a different length, results in false
   2. if they are the same length, and hold all the same characters, return true
     regardless if they are out of order.
+    i. first loop over the firstStr and construct a lookup object
+      of every character and the number of times it occurs
+    ii. second compare that object to the secStr by looping
+      over the secStr and subtracting the frequency count by 1 for each letter found
+      if there is no letter found, return false since the test has failed.
 }
 */
 
-function validAnagram(firstStr, secStr) {
+function validAnagramSolution(firstStr, secStr) {
   if (firstStr.length !== secStr.length) {
     return false
   }
-  let frequencyCounter1 = {}
-  let frequencyCounter2 = {}
-  for (val of firstStr) {
-    frequencyCounter1[val] = (frequencyCounter1[val] || 0) + 1
+  const lookup = {}
+
+  for (let i=0; i < firstStr.length; i++) {
+    let letter = firstStr[i];
+    lookup[letter] ? lookup[letter] += 1: lookup[letter] = 1;
   }
-  for (val of secStr) {
-    frequencyCounter2[val] = (frequencyCounter2[val] || 0) + 1
-  }
-  // console.log(frequencyCounter1)
-  // console.log(frequencyCounter2)
-  // compares two frequency Counters of both strings
-  for (key in frequencyCounter1) {
-    if(!(key in frequencyCounter2)) {
-      return false
+  console.log(lookup)
+  // constructs lookup, next use it to compare with 2nd str
+
+  for(let i=0; i < secStr.length; i++) {
+    let letter = secStr[i]
+    if(!lookup[letter]) {
+      return false;
+    } else {
+      lookup[letter] -= 1;
     }
-    if (key === frequencyCounter2[key]) {
-      return true
-		}
   }
+  console.log(lookup)
+  return true;
 }
 
 
-console.log(validAnagram('', '')) // true
-console.log(validAnagram('aaz', 'zza')) // false
-console.log(validAnagram('anagram', 'nagaram')) // true
-console.log(validAnagram('rat', 'car')) // false
-console.log(validAnagram('awesome', 'awesome')) // false
-console.log(validAnagram('qwerty', 'qeywrty')) // true
-console.log(validAnagram('texttwisttime', 'timetwisttext')) // true
+console.log(validAnagramSolution('aaz', 'zza')) // false
+console.log(validAnagramSolution('', '')) // true
+console.log(validAnagramSolution('anagram', 'nagaram')) // true
+console.log(validAnagramSolution('rat', 'car')) // false
+console.log(validAnagramSolution('awesome', 'awesome')) // false
+console.log(validAnagramSolution('qwerty', 'qeywrty')) // true
+console.log(validAnagramSolution('texttwisttime', 'timetwisttext')) // true
