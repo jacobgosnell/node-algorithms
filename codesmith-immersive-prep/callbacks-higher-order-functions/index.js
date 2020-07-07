@@ -32,18 +32,19 @@ let resultTwo = copyArrayAndDivideBy2(myArray)
 // better generalization
 
 function copyArrayAndManipulate(array, instructions) {
-  let output = [];
-  for (let num of array.length) {
-    output.push(instructions(array[num]));
-  }
-  return output;
+  // let output = [];
+  // for (let num = 0; num < array.length; num++) {
+  //   output.push(instructions(array[num]));
+  // }
+  // return output;
+  return array.map(e => instructions(e));
 }
 
 function multiplyBy2(input) {
   return input * 2;
 }
 
-let resultThree = copyArrayAndManipulate([1, 2, 3], multiplyBy2);
+console.log(copyArrayAndManipulate([1, 2, 3], multiplyBy2));
 
-// obviously using callbacks and higher order functions allows us a tool in order towrite
-// code that is follows the DRY principle.
+// obviously using callbacks and higher order functions allows us a tool in order to write
+// code that follows the DRY principle.
