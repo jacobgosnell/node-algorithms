@@ -6,9 +6,9 @@
 
 function uniqSort(arr) {
   const cache = {};
-  const result = [arr[0]];
+  const result = [];
 
-  for (let i = 1; i < arr.length; i++) { // start loop at 1 as element 0 can never be a duplicate
+  for (let i = 0; i < arr.length; i++) { // start loop at 1 as element 0 can never be a duplicate
     if (!cache[arr[i]]) {  // does the element not exist in cache yet?
       result.push(arr[i]); // if so, push the value to my result array
       cache[arr[i]] = true; // and set the value of the cache array value to true;
