@@ -10,7 +10,9 @@ closure as well, just like the cache from the previous example. */
 
 const memoize = (func) => {
   let cache = {};
-  // to gain access to args of callback, write parameters in as (n, ...args)
+  /* to gain access to args of callback (stored in closure), 
+  write parameters in as (n, ...args) */ 
+  
   return (n, ...args) => {
     if (n in cache) {
       return cache[n]; // returns n multiplied by 10
